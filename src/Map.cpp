@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 16:02:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:07:21 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t	Map::get_height() const { return _grid_height; }
 
 Cell&	Map::get_cell(size_t x, size_t y) const { return _grid[x][y]; }
 
-Stock&	Map::get_stock(t_stock index) { return _stocks[index]; }
+Stock&	Map::get_stock(e_owner index) { return _stocks[index]; }
 //-
 
 

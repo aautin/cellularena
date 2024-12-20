@@ -6,14 +6,17 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 16:13:27 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:55:56 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <pair>
+#include <vector>
 
 #include "Cell.hpp"
 #include "Map.hpp"
+#include "Stock.hpp"
 
 /**
  * Grow and multiply your organisms to end up larger than your opponent.
@@ -42,12 +45,31 @@ static void	update_map_stocks(Map &myMap)
 		int a, b, c, d;
 		std::cin >> a >> b >> c >> d; std::cin.ignore();
 
-		Stock& stock = myMap.get_stock(static_cast<t_stock>(i));
-		stock.set_protein(A, a);
-		stock.set_protein(B, b);
-		stock.set_protein(C, c);
-		stock.set_protein(D, d);
+		Stock& stock = myMap.get_stock(static_cast<e_owner>(i));
+		stock.set_proteins(a, b, c, d);
 	}
+}
+
+void	print_stocks(Stock const& player, Stock const& boss)
+{
+	std::cerr << "Player:"
+		<< player.get_protein(PROTEIN_A) << boss.get_protein(PROTEIN_B)
+		<< player.get_protein(PROTEIN_C) << boss.get_protein(PROTEIN_D) << std::endl;
+
+	std::cerr << "Boss:"
+		<< boss.get_protein(PROTEIN_A) << boss.get_protein(PROTEIN_B)
+		<< boss.get_protein(PROTEIN_C) << boss.get_protein(PROTEIN_D) << std::endl;
+}
+
+int	init_target(Map& myMap, std::vector<std::pair<size_t, size_t> > & shortest_path)
+{
+	// BFS here and stock shortest path
+}
+
+void	go_to_target(Map& myMap, std::stack<std::pair<size_t, size_t> > & shortest_path)
+{
+	// apply next move to the target
+	// update myMap locally
 }
 
 int main()
@@ -57,16 +79,22 @@ int main()
 
 	Map myMap(map_width, map_height);
 
+	std::vector<std::pair<size_t, size_t> >	target_path;
+
 	while (1) {
 
 		update_map_grid(myMap);
 		update_map_stocks(myMap);
+		print_stocks(myMap.get_stock(PLAYER), myMap.get_stock(BOSS));
 
-        int required_actions_count; // your number of organisms, output an action for each one in any order
-		std::cin >> required_actions_count; std::cin.ignore();
-		std::cout << required_actions_count << std::endl;
-        for (int i = 0; i < required_actions_count; i++) {
-            std::cout << "WAIT" << std::endl;
+		int required_actions_nb;
+		std::cin >> required_actions_nb; std::cin.ignore();
+		std::cout << required_actions_nb << std::endl;
+		for (int i = 0; i < required_actions_nb; i++) {
+			if (target_path.empty() && !init_target(myMap, target_path))
+				std::cout << "WAIT" << std::endl;
+			else
+				go_to_target(myMap, target_path);
 		}
     }
 }

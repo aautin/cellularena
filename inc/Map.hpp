@@ -6,14 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 16:53:45 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:16:30 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# include "Cell.hpp"
-# include "Stock.hpp"
+#include "Cell.hpp"
+#include "Stock.hpp"
 
 class Map
 {
@@ -29,7 +29,7 @@ class Map
 		size_t	get_width() const;
 		size_t	get_height() const;
 		Cell&	get_cell(size_t x, size_t y) const;
-		Stock&	get_stock(t_stock index);
+		Stock&	get_stock(e_owner index);
 
 	private:
 		size_t const	_grid_width;

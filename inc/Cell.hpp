@@ -6,17 +6,17 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:18:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 16:54:18 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:15:56 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# define TYPES_NB		10
-# define DIRECTIONS_NB	4
-# define OWNERS_NB		3
+#define TYPES_NB		10
+#define DIRECTIONS_NB	4
+#define OWNERS_NB		3
 
-# include <string>
+#include <string>
 
 typedef enum s_type
 {
@@ -28,9 +28,9 @@ typedef enum s_type
 
 typedef enum s_owner
 {
-	PLAYER,
-	BOSS,
-	NONE
+	PLAYER = 1,
+	BOSS = 0,
+	NONE = -1
 }	e_owner;
 
 typedef enum s_direction
