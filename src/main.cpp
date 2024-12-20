@@ -1,60 +1,72 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
+/*   Updated: 2024/12/20 16:13:27 by aautin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-using namespace std;
+#include <iostream>
+
+#include "Cell.hpp"
+#include "Map.hpp"
 
 /**
  * Grow and multiply your organisms to end up larger than your opponent.
  **/
 
+static void	update_map_grid(Map &myMap)
+{
+	size_t cells_nb;
+	std::cin >> cells_nb; std::cin.ignore();
+
+	for (size_t i = 0; i < cells_nb; i++) {
+		int x, y, owner, organ_id, organ_parent_id, organ_root_id;
+		std::string type, organ_dir;
+
+		std::cin >> x >> y >> type >> owner >> organ_id
+			>> organ_dir >> organ_parent_id >> organ_root_id; std::cin.ignore();
+
+		Cell it(type, owner, organ_dir);
+		myMap.set_cell(it, x, y);
+	}
+}
+
+static void	update_map_stocks(Map &myMap)
+{
+	for (size_t i = 0; i < STOCKS_NB; ++i) {
+		int a, b, c, d;
+		std::cin >> a >> b >> c >> d; std::cin.ignore();
+
+		Stock& stock = myMap.get_stock(static_cast<t_stock>(i));
+		stock.set_protein(A, a);
+		stock.set_protein(B, b);
+		stock.set_protein(C, c);
+		stock.set_protein(D, d);
+	}
+}
+
 int main()
 {
-    int width; // columns in the game grid
-    int height; // rows in the game grid
-    cin >> width >> height; cin.ignore();
+	int map_width, map_height;
+	std::cin >> map_width >> map_height; std::cin.ignore();
 
-    // game loop
-    while (1) {
-        int entity_count;
-        cin >> entity_count; cin.ignore();
-        for (int i = 0; i < entity_count; i++) {
-            int x;
-            int y; // grid coordinate
-            string type; // WALL, ROOT, BASIC, TENTACLE, HARVESTER, SPORER, A, B, C, D
-            int owner; // 1 if your organ, 0 if enemy organ, -1 if neither
-            int organ_id; // id of this entity if it's an organ, 0 otherwise
-            string organ_dir; // N,E,S,W or X if not an organ
-            int organ_parent_id;
-            int organ_root_id;
-            cin >> x >> y >> type >> owner >> organ_id >> organ_dir >> organ_parent_id >> organ_root_id; cin.ignore();
-            cerr << "owner:" << owner << endl;
-            cerr << "x:" << x << endl;
-            cerr << "y:" << y << endl;
-            cerr << "type:" << type << endl;
-            cerr << "organ_id:" << organ_id << endl;
-            cerr << "organ_parent_id:" << organ_parent_id << endl;
-            cerr << "organ_root_id:" << organ_root_id << endl;
-        }
-        int my_a;
-        int my_b;
-        int my_c;
-        int my_d; // your protein stock
-        cin >> my_a >> my_b >> my_c >> my_d; cin.ignore();
-        int opp_a;
-        int opp_b;
-        int opp_c;
-        int opp_d; // opponent's protein stock
-        cin >> opp_a >> opp_b >> opp_c >> opp_d; cin.ignore();
+	Map myMap(map_width, map_height);
+
+	while (1) {
+
+		update_map_grid(myMap);
+		update_map_stocks(myMap);
+
         int required_actions_count; // your number of organisms, output an action for each one in any order
-        cin >> required_actions_count; cin.ignore();
+		std::cin >> required_actions_count; std::cin.ignore();
+		std::cout << required_actions_count << std::endl;
         for (int i = 0; i < required_actions_count; i++) {
-
-            // Write an action using cout. DON'T FORGET THE "<< endl"
-            // To debug: cerr << "Debug messages..." << endl;
-
-            cout << "OIPUWEH" << endl;
-        }
+            std::cout << "WAIT" << std::endl;
+		}
     }
 }

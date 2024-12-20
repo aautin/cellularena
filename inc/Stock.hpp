@@ -1,43 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Map.hpp                                            :+:      :+:    :+:   */
+/*   Stock.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 16:20:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 15:54:47 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_HPP
-# define MAP_HPP
+#ifndef STOCK_HPP
+# define STOCK_HPP
 
-# include "Cell.hpp"
-# include "Stock.hpp"
+# define STOCKS_NB		2
+# define PROTEINS_NB	4
 
-class Map
+# include <cstddef>
+
+typedef enum s_stock
+{
+	PLAYER = 0,
+	BOSS = 1,
+	A = 0,
+	B = 1,
+	C = 2,
+	D = 3
+}	t_stock;
+
+class Stock
 {
 	public:
 		//Constructors-Destructors
-		Map(size_t width, size_t height);
-		~Map();
+		Stock();
+		~Stock();
 
 		//Setters
-		void	set_cell(Cell& cell, size_t x, size_t y);
+		void	set_protein(t_stock protein_index, size_t value);
 
 		//Getters
-		size_t	get_width() const;
-		size_t	get_height() const;
-		Cell&	get_cell(size_t x, size_t y) const;
-		Stock&	get_stock(t_stock index);
+		size_t	get_protein(t_stock protein_index) const;
 
 	private:
-		size_t const	_grid_width;
-		size_t const	_grid_height;
-		Cell**			_grid;
-
-		Stock			_stocks[STOCKS_NB];
+		size_t	_proteins[PROTEINS_NB];
 };
 
 #endif

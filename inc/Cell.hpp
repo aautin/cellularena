@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:18:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 13:21:53 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 15:54:15 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,16 @@ class Cell
 		Cell();
 		Cell(std::string& type, int owner, std::string& direction);
 		~Cell();
-		//-
-
-		//Getters
-		e_type		get_type() const;
-		int			get_owner() const;
-		e_direction	get_direction() const;
-		//-
 
 		//Setters
 		void	set_type(e_type type);
 		void	set_owner(int owner);
 		void	set_direction(e_direction direction);
-		//-
+
+		//Getters
+		e_type		get_type() const;
+		int			get_owner() const;
+		e_direction	get_direction() const;
 
 	private:
 		e_type		_type;
