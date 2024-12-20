@@ -6,12 +6,11 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 16:20:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:53:45 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_HPP
-# define MAP_HPP
+#pragma once
 
 # include "Cell.hpp"
 # include "Stock.hpp"
@@ -39,5 +38,3 @@ class Map
 
 		Stock			_stocks[STOCKS_NB];
 };
-
-#endif

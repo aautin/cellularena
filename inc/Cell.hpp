@@ -6,12 +6,11 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:18:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 15:54:15 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:54:18 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CASE_HPP
-# define CASE_HPP
+#pragma once
 
 # define TYPES_NB		10
 # define DIRECTIONS_NB	4
@@ -68,4 +67,3 @@ class Cell
 		static e_direction	direction_stoi(std::string& direction);
 };
 
-#endif

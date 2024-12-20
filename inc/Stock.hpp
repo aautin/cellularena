@@ -6,12 +6,11 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 15:54:47 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:53:31 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STOCK_HPP
-# define STOCK_HPP
+#pragma once
 
 # define STOCKS_NB		2
 # define PROTEINS_NB	4
@@ -44,5 +43,3 @@ class Stock
 	private:
 		size_t	_proteins[PROTEINS_NB];
 };
-
-#endif
