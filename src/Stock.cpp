@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:48:52 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/20 18:13:29 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/21 17:07:27 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ void	Stock::set_proteins(size_t a, size_t b, size_t c, size_t d)
 	_proteins[PROTEIN_A] = a;
 	_proteins[PROTEIN_B] = b;
 	_proteins[PROTEIN_C] = c;
+	_proteins[PROTEIN_D] = d;
+}
+void	Stock::set_protein_a(size_t a)
+{
+	_proteins[PROTEIN_A] = a;
+}
+
+void	Stock::set_protein_b(size_t b)
+{
+	_proteins[PROTEIN_B] = b;
+}
+
+void	Stock::set_protein_c(size_t c)
+{
+	_proteins[PROTEIN_C] = c;
+}
+
+void	Stock::set_protein_d(size_t d)
+{
 	_proteins[PROTEIN_D] = d;
 }
 //-
