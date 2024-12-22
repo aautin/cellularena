@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/22 17:14:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 02:46:00 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "Map.hpp"
 #include "Stock.hpp"
 #include "growth.hpp"
+#include "path.hpp"
 
 /**
  * Grow and multiply your organisms to end up larger than your opponent.
@@ -37,7 +38,7 @@ static void	update_map_grid(Map &map)
 
 		try {
 			map.set_cell(Cell(type, static_cast<e_owner>(owner), organ_dir), x, y);
-		} catch (std::out_of_range) {}
+		} catch (std::out_of_range) { std::cerr << "out_of_range" << std::endl; }
 	}
 }
 
@@ -61,13 +62,6 @@ void	print_stocks(Stock const& myself, Stock const& opponent)
 	std::cerr << "OPPONENT:"
 		<< opponent.get_protein(PROTEIN_A) << opponent.get_protein(PROTEIN_B)
 		<< opponent.get_protein(PROTEIN_C) << opponent.get_protein(PROTEIN_D) << std::endl;
-}
-
-int	init_target_path(Map& map, std::queue<std::pair<size_t, size_t> > & path)
-{
-	(void) map;
-	(void) path;
-	return false;
 }
 
 int main()
