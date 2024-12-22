@@ -8,7 +8,7 @@ SRC_PATH := src/
 OBJ_PATH := obj/
 INC_PATH := inc/
 
-INC_FILES := $(INC_PATH)/*
+INC_FILES := $(INC_PATH)*
 SRC_FILES := Cell Map Stock growth main
 SRC := $(patsubst %,$(SRC_PATH)%.$(FILE_TYPE), $(SRC_FILES))
 OBJ := $(patsubst %,$(OBJ_PATH)%.o,$(SRC_FILES))

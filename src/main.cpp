@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/22 17:05:40 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/22 17:14:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,12 @@ static void	update_map_grid(Map &map)
 static void	update_map_stocks(Map &map)
 {
 	size_t a, b, c, d;
-	
 
 	std::cin >> a >> b >> c >> d; std::cin.ignore();
-	Stock& my_stock = map.get_stock(MYSELF);
-	my_stock.set_proteins(a, b, c, d);
+	map.get_stock(MYSELF).set_proteins(a, b, c, d);
 
 	std::cin >> a >> b >> c >> d; std::cin.ignore();
-	Stock& oppenent_stock = map.get_stock(OPPONENT);
-	oppenent_stock.set_proteins(a, b, c, d);
+	map.get_stock(OPPONENT).set_proteins(a, b, c, d);
 }
 
 void	print_stocks(Stock const& myself, Stock const& opponent)
@@ -91,8 +88,9 @@ int main()
 		int required_actions_nb;
 		std::cin >> required_actions_nb; std::cin.ignore();
 		for (int i = 0; i < required_actions_nb; ++i) {
-			if (map.get_stock(MYSELF).get_protein(PROTEIN_A) == 0)
+			if (map.get_stock(MYSELF).get_protein(PROTEIN_A) == 0) {
 				std::cout << "WAIT" << std::endl;
+			}
 			else if (!target_path.empty() || init_target_path(map, target_path))
 				grow_towards_target(map, target_path);
 			else
