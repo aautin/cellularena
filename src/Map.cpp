@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/21 16:44:56 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/22 16:31:59 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Cell&	Map::get_cell(size_t x, size_t y) const
 	if (x >= 0 && x < _grid_width
 		&& y >= 0 && y < _grid_height)
 		return _grid[x][y];
-	throw std::out_of_range(NULL);
+	throw std::out_of_range("");
 }
 
 Stock&	Map::get_stock(e_owner index) { return _stocks[index]; }
@@ -50,11 +50,11 @@ Stock&	Map::get_stock(e_owner index) { return _stocks[index]; }
 
 
 //Setters
-void	Map::set_cell(Cell& cell, size_t x, size_t y)
+void	Map::set_cell(Cell cell, size_t x, size_t y)
 {
 	if (x >= 0 && x < _grid_width
 		&& y >= 0 && y < _grid_height)
 		_grid[x][y] = cell;
-	throw std::out_of_range(NULL);
+	throw std::out_of_range("");
 }
 //-

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/21 17:28:48 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/22 17:05:40 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,35 @@ static void	update_map_grid(Map &map)
 		std::cin >> x >> y >> type >> owner >> organ_id
 			>> organ_dir >> organ_parent_id >> organ_root_id; std::cin.ignore();
 
-		Cell it(type, static_cast<e_owner>(owner), organ_dir);
-		map.set_cell(it, x, y);
+		try {
+			map.set_cell(Cell(type, static_cast<e_owner>(owner), organ_dir), x, y);
+		} catch (std::out_of_range) {}
 	}
 }
 
 static void	update_map_stocks(Map &map)
 {
-	for (size_t i = 0; i < STOCKS_NB; ++i) {
-		int a, b, c, d;
-		std::cin >> a >> b >> c >> d; std::cin.ignore();
+	size_t a, b, c, d;
+	
 
-		Stock& stock = map.get_stock(static_cast<e_owner>(i));
-		stock.set_proteins(a, b, c, d);
-	}
+	std::cin >> a >> b >> c >> d; std::cin.ignore();
+	Stock& my_stock = map.get_stock(MYSELF);
+	my_stock.set_proteins(a, b, c, d);
+
+	std::cin >> a >> b >> c >> d; std::cin.ignore();
+	Stock& oppenent_stock = map.get_stock(OPPONENT);
+	oppenent_stock.set_proteins(a, b, c, d);
 }
 
-void	print_stocks(Stock const& MYSELF, Stock const& OPPONENT)
+void	print_stocks(Stock const& myself, Stock const& opponent)
 {
 	std::cerr << "MYSELF:"
-		<< MYSELF.get_protein(PROTEIN_A) << OPPONENT.get_protein(PROTEIN_B)
-		<< MYSELF.get_protein(PROTEIN_C) << OPPONENT.get_protein(PROTEIN_D) << std::endl;
+		<< myself.get_protein(PROTEIN_A) << myself.get_protein(PROTEIN_B)
+		<< myself.get_protein(PROTEIN_C) << myself.get_protein(PROTEIN_D) << std::endl;
 
 	std::cerr << "OPPONENT:"
-		<< OPPONENT.get_protein(PROTEIN_A) << OPPONENT.get_protein(PROTEIN_B)
-		<< OPPONENT.get_protein(PROTEIN_C) << OPPONENT.get_protein(PROTEIN_D) << std::endl;
+		<< opponent.get_protein(PROTEIN_A) << opponent.get_protein(PROTEIN_B)
+		<< opponent.get_protein(PROTEIN_C) << opponent.get_protein(PROTEIN_D) << std::endl;
 }
 
 int	init_target_path(Map& map, std::queue<std::pair<size_t, size_t> > & path)

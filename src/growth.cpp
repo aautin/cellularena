@@ -6,10 +6,11 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:12:30 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/21 17:29:00 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/22 16:31:59 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include <stdexcept>
 
 #include "growth.hpp"
@@ -27,10 +28,9 @@ void	grow_where_possible(Map& map)
 		for (size_t y = 0; y < map.get_height(); ++y) {
 			try {
 				if (map.get_cell(x, y).get_owner() == MYSELF) {
-					size_t const coords[4][2] = { 
-						{x - 1, y}, {x + 1, y},
-						{x, y - 1}, {x, y + 1}
-					};
+					size_t const coords[4][2] = {	{x - 1, y}, {x + 1, y},
+													{x, y - 1}, {x, y + 1} };
+
 					for (size_t i = 0; i < 4; ++i) {
 						Cell& it = map.get_cell(coords[i][0], coords[i][1]);
 						if (it.get_owner() == NO_OWNER && it.get_type() == NO_TYPE) {
@@ -43,6 +43,7 @@ void	grow_where_possible(Map& map)
 			catch (std::out_of_range) {}
 		}
 	}
+	std::cout << "WAIT" << std::endl;
 }
 
 void	grow(Map& map, size_t x, size_t y, e_type type)

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/21 17:27:55 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/22 17:04:39 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ e_type	Cell::type_stoi(std::string& type)
 {
 	const std::string types[TYPES_NB] = {
 		"WALL", "ROOT", "BASIC", "TENTACLE",
-		"HARVESTER", "SPORER", "A", "B", "C", "D", "NO_TYPE"
+		"HARVESTER", "SPORER", "A", "B", "C", "D"
 	};
 
 	for (size_t i = 0; i < TYPES_NB; ++i) {
@@ -70,7 +70,7 @@ std::string	Cell::type_itos(e_type type)
 {
 	const std::string types[TYPES_NB] = {
 		"WALL", "ROOT", "BASIC", "TENTACLE",
-		"HARVESTER", "SPORER", "A", "B", "C", "D", "NO_TYPE"
+		"HARVESTER", "SPORER", "A", "B", "C", "D"
 	};
 
 	for (size_t i = 0; i < TYPES_NB; ++i) {
@@ -82,7 +82,7 @@ std::string	Cell::type_itos(e_type type)
 
 e_direction	Cell::direction_stoi(std::string& direction)
 {
-	const std::string directions[DIRECTIONS_NB] = { "N", "S", "W", "E", "NO_DIRECTION"};
+	const std::string directions[DIRECTIONS_NB] = { "N", "S", "W", "E"};
 
 	for (size_t i = 0; i < DIRECTIONS_NB; ++i) {
 		if (directions[i] == direction)
@@ -93,7 +93,7 @@ e_direction	Cell::direction_stoi(std::string& direction)
 
 std::string	Cell::direction_itos(e_direction direction)
 {
-	const std::string directions[DIRECTIONS_NB] = { "N", "S", "W", "E", "NO_DIRECTION"};
+	const std::string directions[DIRECTIONS_NB] = { "N", "S", "W", "E"};
 
 	for (size_t i = 0; i < DIRECTIONS_NB; ++i) {
 		if (direction == static_cast<e_direction>(i))

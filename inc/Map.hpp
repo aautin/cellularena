@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/21 17:04:23 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/22 16:31:59 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Map
 		~Map();
 
 		//Setters
-		void	set_cell(Cell& cell, size_t x, size_t y);
+		void	set_cell(Cell cell, size_t x, size_t y);
 
 		//Getters
 		size_t	get_width() const;

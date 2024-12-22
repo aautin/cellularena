@@ -6,15 +6,15 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:18:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/21 17:26:11 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/22 16:47:47 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#define TYPES_NB		11
-#define DIRECTIONS_NB	5
-#define OWNERS_NB		3
+#define TYPES_NB		10
+#define DIRECTIONS_NB	4
+#define OWNERS_NB		2
 
 #include <string>
 
@@ -70,6 +70,5 @@ class Cell
 		static std::string	type_itos(e_type type);
 		static e_direction	direction_stoi(std::string& direction);
 		static std::string	direction_itos(e_direction direction);
-
 };
 

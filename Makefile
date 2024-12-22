@@ -8,15 +8,25 @@ SRC_PATH := src/
 OBJ_PATH := obj/
 INC_PATH := inc/
 
+INC_FILES := $(INC_PATH)/*
 SRC_FILES := Cell Map Stock growth main
 SRC := $(patsubst %,$(SRC_PATH)%.$(FILE_TYPE), $(SRC_FILES))
 OBJ := $(patsubst %,$(OBJ_PATH)%.o,$(SRC_FILES))
 DEP := $(OBJ:.o=.d)
 
+BUNDLE_PATH := bundler
+BUNDLED := $(BUNDLE_PATH)/bundled.cpp
+
 all: $(NAME)
 
-debug: CFLAGS += -g3
 debug: re
+
+bundle:
+	cp -r $(SRC) $(INC_FILES) $(BUNDLE_PATH)
+	python3 $(BUNDLE_PATH)/bundler.py -i $(BUNDLE_PATH)/main.cpp -o $(BUNDLED)
+
+copy:
+	xclip -selection clip < $(BUNDLED)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
