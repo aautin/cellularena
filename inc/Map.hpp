@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 20:08:15 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 20:39:07 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ class Map
 		//Grid layer
 		template <typename Type> Type**	new_grid_layer(Type value) const;
 		template <typename Type> void	delete_grid_layer(Type** grid_layer) const;
+
+		//Update
+		void	update_map_grid();
+		void	update_map_stocks();
+		void	update_harvesters();
 
 	private:
 		size_t const	_grid_width;

@@ -6,10 +6,11 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 16:21:16 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 20:44:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include <stdexcept>
 
 #include "Map.hpp"
@@ -55,5 +56,46 @@ void	Map::set_cell(Cell cell, size_t x, size_t y)
 	if (x >= _grid_width || y >= _grid_height)
 		throw std::out_of_range("");
 	_grid[x][y] = cell;
+}
+//-
+
+
+//Update
+void	Map::update_map_grid()
+{
+	size_t cells_nb;
+	std::cin >> cells_nb; std::cin.ignore();
+
+	for (size_t i = 0; i < cells_nb; i++) {
+		int x, y, owner, organ_id, organ_parent_id, organ_root_id;
+		std::string type, organ_dir;
+
+		std::cin >> x >> y >> type >> owner >> organ_id
+			>> organ_dir >> organ_parent_id >> organ_root_id; std::cin.ignore();
+
+		try {
+			set_cell(Cell(type, static_cast<e_owner>(owner), organ_dir, organ_id), x, y);
+		} catch (std::out_of_range) { /* std::cerr << "out_of_range" << std::endl; */}
+	}
+}
+
+void	Map::update_map_stocks()
+{
+	size_t a, b, c, d;
+
+	std::cin >> a >> b >> c >> d; std::cin.ignore();
+	get_stock(MYSELF).set_proteins(a, b, c, d);
+
+	std::cin >> a >> b >> c >> d; std::cin.ignore();
+	get_stock(OPPONENT).set_proteins(a, b, c, d);
+}
+
+void	Map::update_harvesters()
+{
+	std::vector<Harvester>::iterator it;
+	for (it = _harvesters.begin(); it < _harvesters.end(); ++it) {
+		if (it->can_eat())
+			it->eat_meal();
+	}
 }
 //-
