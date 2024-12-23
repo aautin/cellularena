@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 17:25:23 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 22:23:45 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ std::string	Cell::type_itos(e_type type)
 
 e_direction	Cell::direction_stoi(std::string& direction)
 {
-	const std::string directions[DIRECTIONS_NB] = { "N", "S", "W", "E"};
+	const std::string directions[DIRECTIONS_NB] = { "W", "E", "N", "S"};
 
 	for (size_t i = 0; i < DIRECTIONS_NB; ++i) {
 		if (directions[i] == direction)
@@ -100,7 +100,7 @@ e_direction	Cell::direction_stoi(std::string& direction)
 
 std::string	Cell::direction_itos(e_direction direction)
 {
-	const std::string directions[DIRECTIONS_NB] = { "N", "S", "W", "E"};
+	const std::string directions[DIRECTIONS_NB] = { "W", "E", "N", "S"};
 
 	for (size_t i = 0; i < DIRECTIONS_NB; ++i) {
 		if (direction == static_cast<e_direction>(i))

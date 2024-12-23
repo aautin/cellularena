@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:18:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 17:24:59 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 22:18:45 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ enum e_owner
 
 enum e_direction
 {
-	NORTH,	SOUTH,
 	WEST,	EAST,
+	NORTH,	SOUTH,
 	NO_DIRECTION
 };
 
@@ -63,16 +63,16 @@ class Cell
 		e_direction	get_direction() const;
 		size_t		get_organ_id() const;
 
-	private:
-		e_type		_type;
-		int			_owner;
-		e_direction	_direction;
-		size_t		_organ_id;
-
 		//Utils
 		static e_type		type_stoi(std::string& type);
 		static std::string	type_itos(e_type type);
 		static e_direction	direction_stoi(std::string& direction);
 		static std::string	direction_itos(e_direction direction);
+
+	private:
+		e_type		_type;
+		int			_owner;
+		e_direction	_direction;
+		size_t		_organ_id;
 };
 
