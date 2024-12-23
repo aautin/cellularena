@@ -6,13 +6,13 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 02:46:00 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:39:02 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <stack>
 #include <utility>
-#include <queue>
 
 #include "Cell.hpp"
 #include "Map.hpp"
@@ -37,8 +37,8 @@ static void	update_map_grid(Map &map)
 			>> organ_dir >> organ_parent_id >> organ_root_id; std::cin.ignore();
 
 		try {
-			map.set_cell(Cell(type, static_cast<e_owner>(owner), organ_dir), x, y);
-		} catch (std::out_of_range) { std::cerr << "out_of_range" << std::endl; }
+			map.set_cell(Cell(type, static_cast<e_owner>(owner), organ_dir, organ_id), x, y);
+		} catch (std::out_of_range) { /* std::cerr << "out_of_range" << std::endl; */}
 	}
 }
 
@@ -71,13 +71,13 @@ int main()
 
 	Map map(map_width, map_height);
 
-	std::queue<std::pair<size_t, size_t> >	target_path;
+	std::stack<std::pair<size_t, size_t> >	target_path;
 
 	while (1) {
 
 		update_map_grid(map);
 		update_map_stocks(map);
-		print_stocks(map.get_stock(MYSELF), map.get_stock(OPPONENT));
+		// print_stocks(map.get_stock(MYSELF), map.get_stock(OPPONENT));
 
 		int required_actions_nb;
 		std::cin >> required_actions_nb; std::cin.ignore();

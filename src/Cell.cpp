@@ -6,27 +6,30 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/22 17:04:39 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:25:23 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cell.hpp"
 
 //Constructors-Destructors
-Cell::Cell() : _type(NO_TYPE), _owner(NO_OWNER), _direction(NO_DIRECTION) { }
+Cell::Cell()
+: _type(NO_TYPE), _owner(NO_OWNER), _direction(NO_DIRECTION), _organ_id(NO_ID) { }
 
-Cell::Cell(std::string& type, e_owner owner, std::string& direction)
+Cell::Cell(std::string& type, e_owner owner, std::string& direction, size_t organ_id)
 {
 	_type = type_stoi(type);
 	_owner = owner;
 	_direction = direction_stoi(direction);
+	_organ_id = organ_id;
 }
 
-Cell::Cell(e_type type, e_owner owner, e_direction direction)
+Cell::Cell(e_type type, e_owner owner, e_direction direction, size_t organ_id)
 {
 	_type = type;
 	_owner = owner;
 	_direction = direction;
+	_organ_id = organ_id;
 }
 
 Cell::~Cell() { }
@@ -39,6 +42,8 @@ e_type	Cell::get_type() const { return _type; }
 int	Cell::get_owner() const { return _owner; }
 
 e_direction	Cell::get_direction() const { return _direction; }
+
+void	Cell::set_organ_id(size_t organ_id) { _organ_id = organ_id; }
 //-
 
 
@@ -48,6 +53,8 @@ void	Cell::set_type(e_type type) { _type = type; }
 void	Cell::set_owner(int owner) { _owner = owner; }
 
 void	Cell::set_direction(e_direction direction) { _direction = direction; }
+
+size_t	Cell::get_organ_id() const { return _organ_id; }
 //-
 
 

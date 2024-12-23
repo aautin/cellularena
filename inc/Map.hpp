@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 02:42:49 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:53:37 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,25 @@ class Map
 
 		Stock			_stocks[STOCKS_NB];
 };
+
+
+//Grid layer
+template <typename Type>
+Type**	Map::new_grid_layer(Type value) const
+{
+	Type** grid_layer = new Type*[_grid_width];
+	for (size_t x = 0; x < _grid_width; ++x) {
+		grid_layer[x] = new Type[_grid_height];
+		for (size_t y = 0; y < _grid_height; ++y)
+			grid_layer[x][y] = value;
+	}
+	return grid_layer;
+}
+
+template <typename Type> void	Map::delete_grid_layer(Type** grid_layer) const
+{
+	for (size_t x = 0; x < _grid_width; ++x)
+		delete grid_layer[x];
+	delete grid_layer;
+}
+//-
