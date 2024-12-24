@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:48:52 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/22 16:31:59 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 14:48:54 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,13 @@ void	Stock::set_protein_d(size_t d)
 
 //Getters
 size_t	Stock::get_protein(e_protein index) const { return _proteins[index]; }
+//-
+
+
+//Utils
+bool	Stock::is_protein(Cell const& cell)
+{
+	e_type type = cell.get_type();
+	return (type == A) || (type == B) || (type == C) || (type == D);
+}
 //-

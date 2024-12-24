@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/21 17:06:27 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 14:19:34 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #define PROTEINS_NB	4
 
 #include <cstddef>
+
+#include "Cell.hpp"
 
 typedef enum s_protein
 {
@@ -41,6 +43,9 @@ class Stock
 
 		//Getters
 		size_t	get_protein(e_protein protein_index) const;
+
+		//Utils
+		static bool	is_protein(Cell const& cell);
 
 	private:
 		size_t	_proteins[PROTEINS_NB];
