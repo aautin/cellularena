@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 02:14:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:06:05 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,16 @@ void	Map::update_generator(std::vector<Generator>::iterator& it)
 	Stock&	stock = _stocks[MYSELF];
 	switch (static_cast<size_t>(it->get_type())) {
 		case A:
-			stock.set_protein_a(stock.get_protein(PROTEIN_A) + 1);
+			stock.set_protein(A, stock.get_protein(A) + 1);
 			break;
 		case B:
-			stock.set_protein_b(stock.get_protein(PROTEIN_B) + 1);
+			stock.set_protein(B, stock.get_protein(B) + 1);
 			break;
 		case C:
-			stock.set_protein_c(stock.get_protein(PROTEIN_C) + 1);
+			stock.set_protein(C, stock.get_protein(C) + 1);
 			break;
 		case D:
-			stock.set_protein_d(stock.get_protein(PROTEIN_D) + 1);
+			stock.set_protein(D, stock.get_protein(D) + 1);
 			break;			
 	}
 }

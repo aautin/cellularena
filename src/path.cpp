@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 14:54:25 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:08:35 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	init_target_path(Map& map, stack<pair<size_t, size_t> >& path)
 
 	size_t	laps_index = 1;
 	bool	still_growing = true;
-	while (still_growing && laps_index < map.get_stock(MYSELF).get_protein(PROTEIN_A)) {
+	while (still_growing && laps_index < map.get_stock(MYSELF).get_protein(A)) {
 		still_growing = false;
 		for (size_t x = 0; x < map.get_width(); ++x) {
 			for (size_t y = 0; y < map.get_height(); ++y) {

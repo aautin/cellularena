@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:18:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 22:18:45 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:02:48 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 #include <string>
 
 enum e_type {
+	A,	B,	C,	D,
 	WALL,		ROOT,
 	BASIC,		TENTACLE,
 	HARVESTER,	SPORER,
-	A,	B,	C,	D,
 	NO_TYPE
 };
 

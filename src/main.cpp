@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 14:40:19 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:08:16 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 void	print_stocks(Stock const& myself, Stock const& opponent)
 {
 	std::cerr << "MYSELF:"
-		<< myself.get_protein(PROTEIN_A) << myself.get_protein(PROTEIN_B)
-		<< myself.get_protein(PROTEIN_C) << myself.get_protein(PROTEIN_D) << std::endl;
+		<< myself.get_protein(A) << myself.get_protein(B)
+		<< myself.get_protein(C) << myself.get_protein(D) << std::endl;
 
 	std::cerr << "OPPONENT:"
-		<< opponent.get_protein(PROTEIN_A) << opponent.get_protein(PROTEIN_B)
-		<< opponent.get_protein(PROTEIN_C) << opponent.get_protein(PROTEIN_D) << std::endl;
+		<< opponent.get_protein(A) << opponent.get_protein(B)
+		<< opponent.get_protein(C) << opponent.get_protein(D) << std::endl;
 }
 
 int main()
@@ -54,7 +54,7 @@ int main()
 		int required_actions_nb;
 		std::cin >> required_actions_nb; std::cin.ignore();
 		for (int i = 0; i < required_actions_nb; ++i) {
-			if (map.get_stock(MYSELF).get_protein(PROTEIN_A) == 0)
+			if (map.get_stock(MYSELF).get_protein(A) == 0)
 				std::cout << "WAIT" << std::endl;
 			else if (!target_path.empty() || init_target_path(map, target_path))
 				grow_towards_target(map, target_path);

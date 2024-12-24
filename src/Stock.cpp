@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:48:52 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 14:48:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:05:16 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,21 @@ Stock::~Stock() { }
 //Setters
 void	Stock::set_proteins(size_t a, size_t b, size_t c, size_t d)
 {
-	_proteins[PROTEIN_A] = a;
-	_proteins[PROTEIN_B] = b;
-	_proteins[PROTEIN_C] = c;
-	_proteins[PROTEIN_D] = d;
-}
-void	Stock::set_protein_a(size_t a)
-{
-	_proteins[PROTEIN_A] = a;
+	_proteins[A] = a;
+	_proteins[B] = b;
+	_proteins[C] = c;
+	_proteins[D] = d;
 }
 
-void	Stock::set_protein_b(size_t b)
+void	Stock::set_protein(e_type type, size_t value)
 {
-	_proteins[PROTEIN_B] = b;
-}
-
-void	Stock::set_protein_c(size_t c)
-{
-	_proteins[PROTEIN_C] = c;
-}
-
-void	Stock::set_protein_d(size_t d)
-{
-	_proteins[PROTEIN_D] = d;
+	_proteins[type] = value;
 }
 //-
 
 
 //Getters
-size_t	Stock::get_protein(e_protein index) const { return _proteins[index]; }
+size_t	Stock::get_protein(e_type index) const { return _proteins[index]; }
 //-
 
 

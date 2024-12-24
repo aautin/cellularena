@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 22:23:45 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:15:02 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ size_t	Cell::get_organ_id() const { return _organ_id; }
 e_type	Cell::type_stoi(std::string& type)
 {
 	const std::string types[TYPES_NB] = {
+		"A", "B", "C", "D",
 		"WALL", "ROOT", "BASIC", "TENTACLE",
-		"HARVESTER", "SPORER", "A", "B", "C", "D"
+		"HARVESTER", "SPORER" 
 	};
 
 	for (size_t i = 0; i < TYPES_NB; ++i) {
@@ -76,8 +77,9 @@ e_type	Cell::type_stoi(std::string& type)
 std::string	Cell::type_itos(e_type type)
 {
 	const std::string types[TYPES_NB] = {
+		"A", "B", "C", "D",
 		"WALL", "ROOT", "BASIC", "TENTACLE",
-		"HARVESTER", "SPORER", "A", "B", "C", "D"
+		"HARVESTER", "SPORER"
 	};
 
 	for (size_t i = 0; i < TYPES_NB; ++i) {

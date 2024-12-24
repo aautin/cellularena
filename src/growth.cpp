@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:12:30 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 01:59:52 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:07:45 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	grow_towards_target(Map& map, std::stack<std::pair<size_t, size_t> > & path
 {
 	std::pair<size_t, size_t> it = path.top();
 	if (path.size() == 2
-		&& map.get_stock(MYSELF).get_protein(PROTEIN_C)
-		&& map.get_stock(MYSELF).get_protein(PROTEIN_D)) {
+		&& map.get_stock(MYSELF).get_protein(C)
+		&& map.get_stock(MYSELF).get_protein(D)) {
 		size_t i;
 		for (i = 0; i < 4; ++i) {
 			try {
@@ -87,26 +87,26 @@ void	grow(Map& map, Cell const& cell, size_t x, size_t y)
 	try {
 		switch (static_cast<size_t>(map.get_cell(x, y).get_type())) {
 			case A:
-				my_stock.set_protein_a(my_stock.get_protein(PROTEIN_A) + 3);
+				my_stock.set_protein(A, my_stock.get_protein(A) + 3);
 				break;
 			case B:
-				my_stock.set_protein_b(my_stock.get_protein(PROTEIN_B) + 3);
+				my_stock.set_protein(B, my_stock.get_protein(B) + 3);
 				break;
 			case C:
-				my_stock.set_protein_c(my_stock.get_protein(PROTEIN_C) + 3);
+				my_stock.set_protein(C, my_stock.get_protein(C) + 3);
 				break;
 			case D:
-				my_stock.set_protein_d(my_stock.get_protein(PROTEIN_D) + 3);
+				my_stock.set_protein(D, my_stock.get_protein(D) + 3);
 				break;
 		}
 
 		switch (static_cast<size_t>(cell.get_type())) {
 			case BASIC:
-				my_stock.set_protein_a(my_stock.get_protein(PROTEIN_A) - 1);
+				my_stock.set_protein(A, my_stock.get_protein(A) - 1);
 				break;
 			case HARVESTER:
-				my_stock.set_protein_c(my_stock.get_protein(PROTEIN_C) - 1);
-				my_stock.set_protein_d(my_stock.get_protein(PROTEIN_D) - 1);
+				my_stock.set_protein(C, my_stock.get_protein(C) - 1);
+				my_stock.set_protein(D, my_stock.get_protein(D) - 1);
 				break;
 		}
 
