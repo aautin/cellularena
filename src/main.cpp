@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 20:46:40 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 01:41:14 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int main()
 
 	while (1) {
 
-		map.update_map_grid();
-		map.update_map_stocks();
-		map.update_harvesters();
+		map.update_grid();
+		map.update_stocks();
+		map.update_generators();
 		// print_stocks(map.get_stock(MYSELF), map.get_stock(OPPONENT));
 
 		int required_actions_nb;

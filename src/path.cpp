@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 16:56:04 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 02:02:37 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	fill_path(int** grid_layer, stack<pair<size_t, size_t> >& path,
 {
 	while (laps_index > 0) {
 		for (size_t i = 0; i < 4; ++i) {
-			if (grid_layer[x + nearby[i][0]][y + nearby[i][1]] == laps_index) {
-				x = x + nearby[i][0];
-				y = y + nearby[i][1];
+			if (grid_layer[x + near_x[i]][y + near_y[i]] == laps_index) {
+				x = x + near_x[i];
+				y = y + near_y[i];
 				
 				path.push(make_pair(x, y));
 				laps_index--;
@@ -52,7 +52,7 @@ int	init_target_path(Map& map, stack<pair<size_t, size_t> >& path)
 				Cell& cell = map.get_cell(x, y);
 				if (cell.get_owner() == MYSELF)
 					grid_layer[x][y] = 0;
-			} catch (std::out_of_range) { /* std::cerr << "out_of_range" << std::endl; */}
+			} catch (...) {}
 		}
 	}
 
@@ -65,26 +65,28 @@ int	init_target_path(Map& map, stack<pair<size_t, size_t> >& path)
 				try {
 					if (grid_layer[x][y] == static_cast<int>(laps_index) - 1) {
 						for (size_t i = 0; i < 4; ++i) {
-							Cell& cell = map.get_cell(x + nearby[i][0],
-															y + nearby[i][1]);
-							if (grid_layer[x + nearby[i][0]][y + nearby[i][1]] == UNREACHED
+							Cell& cell = map.get_cell(x + near_x[i],
+															y + near_y[i]);
+							if (grid_layer[x + near_x[i]][y + near_y[i]] == UNREACHED
 								&& cell.get_owner() == NO_OWNER) {
-								if (cell.get_type() == A) {
-									path.push(make_pair(x + nearby[i][0], y + nearby[i][1]));
+								if (cell.get_type() == A
+									&& !map.is_generator(x + near_x[i], y + near_y[i])) {
+
+									path.push(make_pair(x + near_x[i], y + near_y[i]));
 									fill_path(grid_layer, path,
-										x + nearby[i][0], y + nearby[i][1], laps_index - 1);
+										x + near_x[i], y + near_y[i], laps_index - 1);
 									map.delete_grid_layer<int>(grid_layer);
 									print_path(path);
 									return true;
 								}
 								else if (cell.get_type() != WALL) {
-									grid_layer[x + nearby[i][0]][y + nearby[i][1]] = laps_index;
+									grid_layer[x + near_x[i]][y + near_y[i]] = laps_index;
 									still_growing = true;
 								}	
 							}
 						}
 					}
-				} catch (std::out_of_range) { /* std::cerr << "out_of_range" << std::endl; */}
+				} catch (...) {}
 			}
 		}
 		laps_index++;

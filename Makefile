@@ -9,7 +9,7 @@ OBJ_PATH := obj/
 INC_PATH := inc/
 
 INC_FILES := $(INC_PATH)*
-SRC_FILES := Cell Harvester Map Stock growth main path
+SRC_FILES := Cell Generator Map Stock growth main path
 SRC := $(patsubst %,$(SRC_PATH)%.$(FILE_TYPE), $(SRC_FILES))
 OBJ := $(patsubst %,$(OBJ_PATH)%.o,$(SRC_FILES))
 DEP := $(OBJ:.o=.d)

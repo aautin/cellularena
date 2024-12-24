@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 20:44:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 02:14:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	Map::set_cell(Cell cell, size_t x, size_t y)
 
 
 //Update
-void	Map::update_map_grid()
+void	Map::update_grid()
 {
 	size_t cells_nb;
 	std::cin >> cells_nb; std::cin.ignore();
@@ -75,11 +75,11 @@ void	Map::update_map_grid()
 
 		try {
 			set_cell(Cell(type, static_cast<e_owner>(owner), organ_dir, organ_id), x, y);
-		} catch (std::out_of_range) { /* std::cerr << "out_of_range" << std::endl; */}
+		} catch (...) {}
 	}
 }
 
-void	Map::update_map_stocks()
+void	Map::update_stocks()
 {
 	size_t a, b, c, d;
 
@@ -90,12 +90,56 @@ void	Map::update_map_stocks()
 	get_stock(OPPONENT).set_proteins(a, b, c, d);
 }
 
-void	Map::update_harvesters()
+void	Map::update_generator(std::vector<Generator>::iterator& it)
 {
-	std::vector<Harvester>::iterator it;
-	for (it = _harvesters.begin(); it < _harvesters.end(); ++it) {
-		if (it->can_eat())
-			it->eat_meal();
+	Stock&	stock = _stocks[MYSELF];
+	switch (static_cast<size_t>(it->get_type())) {
+		case A:
+			stock.set_protein_a(stock.get_protein(PROTEIN_A) + 1);
+			break;
+		case B:
+			stock.set_protein_b(stock.get_protein(PROTEIN_B) + 1);
+			break;
+		case C:
+			stock.set_protein_c(stock.get_protein(PROTEIN_C) + 1);
+			break;
+		case D:
+			stock.set_protein_d(stock.get_protein(PROTEIN_D) + 1);
+			break;			
+	}
+}
+
+void	Map::update_generators()
+{
+	std::vector<Generator>::iterator it;
+	for (it = _generators.begin(); it < _generators.end(); ++it)
+		update_generator(it);
+}
+//-
+
+//Generator
+void	Map::add_generator(size_t x, size_t y, e_type type)
+{
+	_generators.push_back(Generator(x, y, type));
+	update_generator(--_generators.end());
+}
+
+bool	Map::is_generator(size_t x, size_t y) const
+{
+	std::vector<Generator>::const_iterator it;
+	for (it = _generators.begin(); it < _generators.end(); ++it) {
+		if (it->get_x() == x && it->get_y() == y)
+			return true;
+	}
+	return false;
+}
+
+void	Map::pop_generator(size_t x, size_t y)
+{
+	std::vector<Generator>::const_iterator it;
+	for (it = _generators.begin(); it < _generators.end(); ++it) {
+		if (it->get_x() == x && it->get_y() == y)
+			_generators.erase(it);
 	}
 }
 //-

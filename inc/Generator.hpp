@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harvester.hpp                                      :+:      :+:    :+:   */
+/*   Generator.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 19:50:08 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 22:16:06 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 02:13:12 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#define MEALS_NB_MAX 3
-
 #include <cstddef>
 
-class Harvester
+#include "Cell.hpp"
+
+class Generator
 {
 	public:
 		//Constructors-Destructors
-		Harvester(size_t x, size_t y);
-		~Harvester();
+		Generator(size_t x, size_t y, e_type type);
+		~Generator();
 
 		//Overloads
-		Harvester	operator=(Harvester const& other);
+		Generator	operator=(Generator const& other);
 
 		//Getters
 		size_t	get_x() const;
 		size_t	get_y() const;
-
-		//Meals
-		void	eat_meal();
-		bool	can_eat() const;
+		e_type	get_type() const;
 
 	private:
 		size_t const	_x;
 		size_t const	_y;
-		size_t			_meals_number;
+		e_type const	_type;
 };

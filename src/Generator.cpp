@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harvester.cpp                                      :+:      :+:    :+:   */
+/*   Generator.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 19:50:53 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/23 20:05:18 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 02:13:53 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harvester.hpp"
+#include "Generator.hpp"
 
 //Constructors-Destructors
-Harvester::Harvester(size_t x, size_t y) : _x(x), _y(y), _meals_number(0) { }
+Generator::Generator(size_t x, size_t y, e_type type)
+: _x(x), _y(y), _type(type) { }
 
-Harvester::~Harvester() {};
+Generator::~Generator() {};
 //-
 
 
 //Overloads
-Harvester	Harvester::operator=(Harvester const& other)
-{
-	this->_meals_number = other._meals_number;
-	return *this;
-}
+Generator	Generator::operator=(Generator const& other) { (void) other; return *this; }
 //-
 
 
 //Getters
-size_t	Harvester::get_x() const { return _x; }
+size_t	Generator::get_x() const { return _x; }
 
-size_t	Harvester::get_y() const { return _y; }
-//-
+size_t	Generator::get_y() const { return _y; }
 
-
-//Meals
-void	Harvester::eat_meal() { _meals_number++; }
-
-bool	Harvester::can_eat() const { return _meals_number < MEALS_NB_MAX; }
+e_type	Generator::get_type() const { return _type; }
 //-
