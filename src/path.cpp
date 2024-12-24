@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 15:08:35 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 18:38:11 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@
 #include "Stock.hpp"
 #include "growth.hpp"
 #include "path.hpp"
+
+bool	is_path_valid(Map& map, stack<pair<size_t, size_t> > path)
+{
+	if (path.empty())
+		return false;
+
+	while (!path.empty()) {
+		try {
+			Cell& next_cell = map.get_cell(path.top().first, path.top().second);
+			if (next_cell.get_owner() != NO_OWNER || next_cell.get_type() == WALL)
+				return false;
+			path.pop();
+		} catch (...) {}
+	}
+	return true;
+}
 
 void	print_path(stack<pair<size_t, size_t> > path) {
 	while (!path.empty()) {
@@ -44,7 +60,7 @@ void	fill_path(int** grid_layer, stack<pair<size_t, size_t> >& path,
 	}
 }
 
-int	init_target_path(Map& map, stack<pair<size_t, size_t> >& path)
+int	init_path(Map& map, stack<pair<size_t, size_t> >& path)
 {
 	int** grid_layer = map.new_grid_layer<int>(UNREACHED);
 

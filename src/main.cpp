@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 15:08:16 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 18:38:01 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int main()
 		for (int i = 0; i < required_actions_nb; ++i) {
 			if (map.get_stock(MYSELF).get_protein(A) == 0)
 				std::cout << "WAIT" << std::endl;
-			else if (!target_path.empty() || init_target_path(map, target_path))
+			else if (is_path_valid(map, target_path) || init_path(map, target_path))
 				grow_towards_target(map, target_path);
 			else
 				grow_where_possible(map);
