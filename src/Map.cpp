@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:24:30 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/25 00:48:16 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdexcept>
 
 #include "Map.hpp"
-#include "growth.hpp"
+#include "near.h"
 
 //Constructors-Destructors
 Map::Map(size_t width, size_t height)

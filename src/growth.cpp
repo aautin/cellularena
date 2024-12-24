@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:12:30 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 18:48:25 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/25 00:48:39 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdexcept>
 
 #include "growth.hpp"
+#include "near.h"
 
 static size_t	get_closest_id(Map& map, size_t x, size_t y, e_owner owner)
 {

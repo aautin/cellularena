@@ -6,12 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 16:12:05 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/25 00:47:43 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cell.hpp"
-#include "growth.hpp"
+#include "near.h"
 
 //Constructors-Destructors
 Cell::Cell()

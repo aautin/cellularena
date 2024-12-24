@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:02:17 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/25 00:48:55 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <stack>
 
 #include "Stock.hpp"
-#include "growth.hpp"
 #include "path.hpp"
+#include "near.h"
 
 bool	is_path_valid(Map& map, std::stack<coords_t> path)
 {
