@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 16:34:01 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/25 00:24:30 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdexcept>
 
 #include "Map.hpp"
+#include "growth.hpp"
 
 //Constructors-Destructors
 Map::Map(size_t width, size_t height)
@@ -90,8 +91,11 @@ void	Map::update_stocks()
 	get_stock(OPPONENT).set_proteins(a, b, c, d);
 }
 
-void	Map::update_generator(std::vector<Generator>::iterator& it)
+bool	Map::update_generator(std::vector<Generator>::iterator& it)
 {
+	if (is_in_use(it->get_x(), it->get_y()))
+		return false;
+
 	Stock&	stock = _stocks[MYSELF];
 	switch (static_cast<size_t>(it->get_type())) {
 		case A:
@@ -105,15 +109,21 @@ void	Map::update_generator(std::vector<Generator>::iterator& it)
 			break;
 		case D:
 			stock.set_protein(D, stock.get_protein(D) + 1);
-			break;			
+			break;
 	}
+	return true;
 }
 
 void	Map::update_generators()
 {
 	std::vector<Generator>::iterator it;
-	for (it = _generators.begin(); it < _generators.end(); ++it)
-		update_generator(it);
+	for (it = _generators.begin(); it != _generators.end();) {
+		if (update_generator(it) == false) {
+			it = _generators.erase(it);
+		}
+		else
+			++it;
+	}
 }
 //-
 
@@ -129,7 +139,23 @@ bool	Map::is_generator(size_t x, size_t y) const
 	std::vector<Generator>::const_iterator it;
 	for (it = _generators.begin(); it < _generators.end(); ++it) {
 		if (it->get_x() == x && it->get_y() == y)
-			return true;
+			return is_in_use(x, y);
+	}
+	return false;
+}
+
+bool	Map::is_in_use(size_t x, size_t y) const
+{
+	e_direction reverse_dirs[DIRECTIONS_NB] = {EAST, WEST, SOUTH, NORTH};
+
+	for (size_t i = 0; i < 4; ++i) {
+		size_t nearx = x + near_x[i], neary = y + near_y[i];
+		try {
+			Cell& cell = get_cell(nearx, neary);
+			if (cell.get_owner() == MYSELF && cell.get_type() == HARVESTER
+				&& cell.get_direction() == reverse_dirs[i])
+				return true;
+		} catch (...) {}
 	}
 	return false;
 }

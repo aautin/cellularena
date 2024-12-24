@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 16:35:12 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/25 00:44:22 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ class Map
 		//Update
 		void	update_grid();
 		void	update_stocks();
-		void	update_generator(std::vector<Generator>::iterator& it);
+		bool	update_generator(std::vector<Generator>::iterator& it);
 		void	update_generators();
 
 		//Generator
 		void	add_generator(size_t x, size_t y, e_type type);
 		bool	is_generator(size_t x, size_t y) const;
+		bool	is_generator(std::vector<Generator>::iterator& it) const;
+		bool	is_in_use(size_t x, size_t y) const;
 		void	pop_generator(size_t x, size_t y);
 
 	private:

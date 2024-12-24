@@ -19,8 +19,6 @@ BUNDLED := $(BUNDLE_PATH)/bundled.cpp
 
 all: $(NAME)
 
-debug: re
-
 bundle: all
 	cp -r $(SRC) $(INC_FILES) $(BUNDLE_PATH)
 	python3 $(BUNDLE_PATH)/bundler.py -i $(BUNDLE_PATH)/main.cpp -o $(BUNDLED)
