@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:12:30 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 17:18:29 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 18:48:25 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static bool	should_set_harvester(Stock const& stock, size_t path_size)
 	return path_size == 2 && stock.get_protein(C) && stock.get_protein(D);
 }
 
-void	grow_towards_target(Map& map, std::stack<std::pair<size_t, size_t> > & path)
+void	grow_towards_target(Map& map, std::stack<coords_t> & path)
 {
-	std::pair<size_t, size_t> next = path.top();
+	coords_t next = path.top();
 	path.pop();
 
 	if (should_set_harvester(map.get_stock(MYSELF), path.size())) {
-		std::pair<size_t, size_t> target = path.top();
+		coords_t target = path.top();
 		e_direction dir = Cell::coords_to_direction(
 			target.first - next.first, target.second - next.second);
 
