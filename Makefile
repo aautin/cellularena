@@ -2,7 +2,7 @@ NAME := cellularena
 
 CC := c++
 FILE_TYPE := cpp
-CFLAGS := -Werror -Wall -Wextra -MMD -MP -g3
+CFLAGS := -Werror -Wall -Wextra -MMD -MP -g3 -gdwarf-4
 
 SRC_PATH := src/
 OBJ_PATH := obj/
