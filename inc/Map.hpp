@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 02:00:11 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 16:35:12 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ class Map
 
 		std::vector<Generator>	_generators;
 };
-
 
 //Grid layer
 template <typename Type>

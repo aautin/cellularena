@@ -6,11 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 15:15:02 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/24 16:12:05 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cell.hpp"
+#include "growth.hpp"
 
 //Constructors-Destructors
 Cell::Cell()
@@ -109,5 +110,14 @@ std::string	Cell::direction_itos(e_direction direction)
 			return directions[i];
 	}
 	return "NO_DIRECTION";
+}
+
+e_direction	Cell::coords_to_direction(int x, int y)
+{
+	for (size_t i = 0; i < 4; ++i) {
+		if (near_x[i] == x && near_y[i] == y)
+			return static_cast<e_direction>(i);
+	}
+	return NO_DIRECTION;
 }
 //-
