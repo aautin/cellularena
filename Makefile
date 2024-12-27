@@ -40,6 +40,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
 clean:
 	rm -rf $(OBJ_PATH)
 	rm -f $(BUNDLE_PATH)/*pp
+	rm -f $(BUNDLE_PATH)/*.h
 
 fclean: clean
 	rm -f $(NAME)
