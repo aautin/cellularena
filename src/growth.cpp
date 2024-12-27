@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:12:30 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 15:24:05 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 16:06:23 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ size_t	get_closest_id(Map& map, size_t x, size_t y, e_owner owner)
 //-
 
 //
-void	grow_towards_target(Map& map, std::stack<coords_t> & path)
+void	grow_towards_protein(Map& map, std::stack<coords_t> & path)
 {
 	coords_t next = path.top();
 	path.pop();

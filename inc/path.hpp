@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:12:34 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 15:42:24 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 17:39:41 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 typedef std::pair<size_t, size_t> coords_t;
 
-bool	is_path_valid(Map& map, std::stack<coords_t> path);
+void	empty_path(std::stack<coords_t>& path_ref);
+bool	is_path_valid(Map& map, std::stack<coords_t>& path);
 void	print_path(std::stack<coords_t> path);
 void	retrace_steps(int** grid_layer, std::stack<coords_t>& path,
 					size_t target_x, size_t target_y, int laps_index);

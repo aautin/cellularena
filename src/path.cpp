@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 15:48:41 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 15:59:37 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,26 @@
 #include "growth.hpp"
 #include "near.h"
 
-bool	is_path_valid(Map& map, std::stack<coords_t> path)
+void	empty_path(std::stack<coords_t>& path_ref)
 {
-	if (path.empty())
+	while (!path_ref.empty())
+		path_ref.pop();
+}
+
+bool	is_path_valid(Map& map, std::stack<coords_t>& path_ref)
+{
+	std::stack<coords_t> path_copy = path_ref;
+	if (path_ref.empty())
 		return false;
 
-	while (!path.empty()) {
+	while (!path_copy.empty()) {
 		try {
-			Cell& next_cell = map.get_cell(path.top().first, path.top().second);
-			if (next_cell.get_owner() != NO_OWNER || next_cell.get_type() == WALL)
+			Cell& next_cell = map.get_cell(path_copy.top().first, path_copy.top().second);
+			if (next_cell.get_owner() != NO_OWNER || next_cell.get_type() == WALL) {
+				empty_path(path_ref);
 				return false;
-			path.pop();
+			}
+			path_copy.pop();
 		} catch (...) {}
 	}
 	return true;
