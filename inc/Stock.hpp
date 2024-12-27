@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:44:31 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 20:05:41 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ class Stock
 
 		//Getters
 		size_t	get_protein(e_type protein_index) const;
-
-		//Utils
-		static bool	is_protein(Cell const& cell);
 
 	private:
 		size_t	_proteins[PROTEINS_NB];

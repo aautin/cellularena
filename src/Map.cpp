@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:48:16 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 21:42:50 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,29 @@ void	Map::update_stocks()
 	get_stock(OPPONENT).set_proteins(a, b, c, d);
 }
 
-bool	Map::update_generator(std::vector<Generator>::iterator& it)
+void	Map::update_generators()
 {
-	if (is_in_use(it->get_x(), it->get_y()))
-		return false;
+	std::vector<Generator>::iterator it;
+	for (it = _generators.begin(); it != _generators.end();) {
+		try {
+			Cell& cell = get_cell(it->get_x(), it->get_y());
+			if (!Cell::is_protein(cell) || !is_still_in_use(*it))
+				it = _generators.erase(it);
+			else
+				++it;
+		} catch (...) { it = _generators.erase(it); }
+	}
+}
+//-
+
+
+//Generator
+void	Map::add_generator(size_t x, size_t y, e_type type)
+{
+	_generators.push_back(Generator(x, y, type));
 
 	Stock&	stock = _stocks[MYSELF];
-	switch (static_cast<size_t>(it->get_type())) {
+	switch (static_cast<size_t>(_generators.back().get_type())) {
 		case A:
 			stock.set_protein(A, stock.get_protein(A) + 1);
 			break;
@@ -111,45 +127,24 @@ bool	Map::update_generator(std::vector<Generator>::iterator& it)
 			stock.set_protein(D, stock.get_protein(D) + 1);
 			break;
 	}
-	return true;
-}
-
-void	Map::update_generators()
-{
-	std::vector<Generator>::iterator it;
-	for (it = _generators.begin(); it != _generators.end();) {
-		if (update_generator(it) == false) {
-			it = _generators.erase(it);
-		}
-		else
-			++it;
-	}
-}
-//-
-
-//Generator
-void	Map::add_generator(size_t x, size_t y, e_type type)
-{
-	_generators.push_back(Generator(x, y, type));
-	update_generator(--_generators.end());
 }
 
 bool	Map::is_generator(size_t x, size_t y) const
 {
 	std::vector<Generator>::const_iterator it;
-	for (it = _generators.begin(); it < _generators.end(); ++it) {
+	for (it = _generators.begin(); it != _generators.end(); ++it) {
 		if (it->get_x() == x && it->get_y() == y)
-			return is_in_use(x, y);
+			return true;
 	}
 	return false;
 }
 
-bool	Map::is_in_use(size_t x, size_t y) const
+bool	Map::is_still_in_use(Generator const& it) const
 {
 	e_direction reverse_dirs[DIRECTIONS_NB] = {EAST, WEST, SOUTH, NORTH};
 
 	for (size_t i = 0; i < 4; ++i) {
-		size_t nearx = x + near_x[i], neary = y + near_y[i];
+		size_t nearx = it.get_x() + near_x[i], neary = it.get_y() + near_y[i];
 		try {
 			Cell& cell = get_cell(nearx, neary);
 			if (cell.get_owner() == MYSELF && cell.get_type() == HARVESTER
@@ -158,14 +153,5 @@ bool	Map::is_in_use(size_t x, size_t y) const
 		} catch (...) {}
 	}
 	return false;
-}
-
-void	Map::pop_generator(size_t x, size_t y)
-{
-	std::vector<Generator>::const_iterator it;
-	for (it = _generators.begin(); it < _generators.end(); ++it) {
-		if (it->get_x() == x && it->get_y() == y)
-			_generators.erase(it);
-	}
 }
 //-

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 17:41:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 20:35:04 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_stocks(Stock const& myself, Stock const& opponent)
 		<< opponent.get_protein(C) << opponent.get_protein(D) << std::endl;
 }
 
-bool	operator<=(std::stack<coords_t> const& s1, std::stack<coords_t> const& s2)
+bool	operator<=(std::stack<coords> const& s1, std::stack<coords> const& s2)
 {
 	std::cerr << "OPERATOR<=" << std::endl;
 
@@ -51,8 +51,8 @@ int main()
 	std::cin >> map_width >> map_height; std::cin.ignore();
 
 	Map map(map_width, map_height);
-	std::stack<coords_t> protein_path;
-	std::stack<coords_t> opponent_path;
+	std::stack<coords> protein_path;
+	std::stack<coords> opponent_path;
 	Stock& my_stock = map.get_stock(MYSELF);
 
 	while (1) {

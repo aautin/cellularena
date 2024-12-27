@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:47:43 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 21:29:16 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,11 @@ e_direction	Cell::coords_to_direction(int x, int y)
 			return static_cast<e_direction>(i);
 	}
 	return NO_DIRECTION;
+}
+
+bool	Cell::is_protein(Cell const& cell)
+{
+	e_type type = cell.get_type();
+	return (type == A) || (type == B) || (type == C) || (type == D);
 }
 //-

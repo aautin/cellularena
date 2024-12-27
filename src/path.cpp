@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 15:59:37 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 20:38:57 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 #include "growth.hpp"
 #include "near.h"
 
-void	empty_path(std::stack<coords_t>& path_ref)
+void	empty_path(std::stack<coords>& path_ref)
 {
 	while (!path_ref.empty())
 		path_ref.pop();
 }
 
-bool	is_path_valid(Map& map, std::stack<coords_t>& path_ref)
+bool	is_path_valid(Map const& map, std::stack<coords>& path_ref)
 {
-	std::stack<coords_t> path_copy = path_ref;
+	std::stack<coords> path_copy = path_ref;
 	if (path_ref.empty())
 		return false;
 
@@ -44,15 +44,15 @@ bool	is_path_valid(Map& map, std::stack<coords_t>& path_ref)
 	return true;
 }
 
-void	print_path(std::stack<coords_t> path) {
+void	print_path(std::stack<coords> path) {
 	while (!path.empty()) {
-		coords_t& top = path.top();
+		coords& top = path.top();
 		std::cerr << top.first << "x" << top.second << "y" << ", " << std::endl;
 		path.pop();
 	}
 }
 
-void	retrace_steps(int** grid_layer, std::stack<coords_t>& path,
+void	retrace_steps(int** grid_layer, std::stack<coords>& path,
 		size_t x, size_t y, int laps_index)
 {
 	path.push(std::make_pair(x, y));
@@ -82,7 +82,7 @@ static void mark_territory(Map& map, int** grid_layer, e_owner owner, int value)
 	}
 }
 
-int	init_protein_path(Map& map, std::stack<coords_t>& path)
+int	init_protein_path(Map& map, std::stack<coords>& path)
 {
 	int** grid_layer = map.new_grid_layer<int>(UNREACHED);
 	mark_territory(map, grid_layer, MYSELF, 0);
@@ -108,7 +108,7 @@ int	init_protein_path(Map& map, std::stack<coords_t>& path)
 							continue;
 						still_growing = true;
 
-						if (Stock::is_protein(cell) && !map.is_generator(nearx, neary)) {
+						if (Cell::is_protein(cell) && !map.is_generator(nearx, neary)) {
 							retrace_steps(grid_layer, path, nearx, neary, laps_index);
 							map.delete_grid_layer<int>(grid_layer);
 							return true;

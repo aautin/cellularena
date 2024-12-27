@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:18:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:44:14 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 21:29:25 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ class Cell
 		static e_direction	direction_stoi(std::string& direction);
 		static std::string	direction_itos(e_direction direction);
 		static e_direction	coords_to_direction(int x, int y);
+		static bool			is_protein(Cell const& cell);
 
 	private:
 		e_type		_type;

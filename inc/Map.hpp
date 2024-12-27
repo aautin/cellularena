@@ -6,17 +6,25 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:44:22 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 21:42:04 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <stack>
 #include <vector>
 
 #include "Cell.hpp"
 #include "Generator.hpp"
 #include "Stock.hpp"
+#include "coords.h"
+
+enum e_path {
+	PROTEIN_PATH,
+	OPPONENT_PATH,
+	PATHS_NB
+};
 
 class Map
 {
@@ -41,22 +49,19 @@ class Map
 		//Update
 		void	update_grid();
 		void	update_stocks();
-		bool	update_generator(std::vector<Generator>::iterator& it);
 		void	update_generators();
 
 		//Generator
 		void	add_generator(size_t x, size_t y, e_type type);
 		bool	is_generator(size_t x, size_t y) const;
-		bool	is_generator(std::vector<Generator>::iterator& it) const;
-		bool	is_in_use(size_t x, size_t y) const;
-		void	pop_generator(size_t x, size_t y);
+		bool	is_still_in_use(Generator const& it) const;
 
 	private:
-		size_t const	_grid_width;
-		size_t const	_grid_height;
-		Cell**			_grid;
-		Stock			_stocks[STOCKS_NB];
-
+		size_t const			_grid_width;
+		size_t const			_grid_height;
+		Cell**					_grid;
+		Stock					_stocks[STOCKS_NB];
+		std::stack<coords>		_paths[PATHS_NB];
 		std::vector<Generator>	_generators;
 };
 

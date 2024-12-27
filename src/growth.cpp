@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:12:30 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 16:06:23 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 21:29:31 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ size_t	get_closest_id(Map& map, size_t x, size_t y, e_owner owner)
 //-
 
 //
-void	grow_towards_protein(Map& map, std::stack<coords_t> & path)
+void	grow_towards_protein(Map& map, std::stack<coords> & path)
 {
-	coords_t next = path.top();
+	coords next = path.top();
 	path.pop();
 
 	if (can_grow_harvester(map.get_stock(MYSELF)) && path.size() == 2) {
-		coords_t target = path.top();
+		coords target = path.top();
 		e_direction dir = Cell::coords_to_direction(
 			target.first - next.first, target.second - next.second);
 
@@ -136,9 +136,6 @@ void	grow(Map& map, Cell const& cell, size_t x, size_t y)
 {
 	try {
 		apply_grow_on_stock(map.get_stock(MYSELF), map.get_cell(x, y), cell);
-
-		if (map.is_generator(x, y))
-			map.pop_generator(x, y);
 
 		map.set_cell(cell, x, y);
 		std::cout << "GROW "

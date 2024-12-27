@@ -6,11 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 19:50:53 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/24 02:13:53 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 21:45:55 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Generator.hpp"
+#include "near.h"
 
 //Constructors-Destructors
 Generator::Generator(size_t x, size_t y, e_type type)
