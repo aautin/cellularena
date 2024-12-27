@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:13:07 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:46:35 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 15:24:23 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 
 typedef std::pair<size_t, size_t> coords_t;
 
+
+//Conditions
+bool	can_grow(Stock const& stock);
+bool	can_grow_basic(Stock const& stock);
+bool	can_grow_harvester(Stock const& stock);
+bool	can_grow_tentacle(Stock const& stock);
+
+//Utils
+size_t	get_closest_id(Map& map, size_t x, size_t y, e_owner owner);
+
+//Grow
 void	grow_towards_target(Map& map, std::stack<coords_t> & path);
 void	grow_where_possible(Map& map);
 void	grow(Map& map, Cell const& cell, size_t x, size_t y);

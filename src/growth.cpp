@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:12:30 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:48:39 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 15:24:05 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,30 @@
 #include "growth.hpp"
 #include "near.h"
 
-static size_t	get_closest_id(Map& map, size_t x, size_t y, e_owner owner)
+//Conditions
+bool	can_grow(Stock const& stock)
+{
+	return can_grow_basic(stock) || can_grow_harvester(stock) || can_grow_tentacle(stock);
+}
+
+bool	can_grow_basic(Stock const& stock)
+{
+	return stock.get_protein(A);
+}
+
+bool	can_grow_harvester(Stock const& stock)
+{
+	return stock.get_protein(C) && stock.get_protein(D);
+}
+
+bool	can_grow_tentacle(Stock const& stock)
+{
+	return stock.get_protein(B) && stock.get_protein(C);
+}
+//-
+
+//Utils
+size_t	get_closest_id(Map& map, size_t x, size_t y, e_owner owner)
 {
 	for (size_t i = 0; i < 4; ++i) {
 		try {
@@ -27,18 +50,15 @@ static size_t	get_closest_id(Map& map, size_t x, size_t y, e_owner owner)
 	}
 	return NO_ID;
 }
+//-
 
-static bool	should_set_harvester(Stock const& stock, size_t path_size)
-{
-	return path_size == 2 && stock.get_protein(C) && stock.get_protein(D);
-}
-
+//
 void	grow_towards_target(Map& map, std::stack<coords_t> & path)
 {
 	coords_t next = path.top();
 	path.pop();
 
-	if (should_set_harvester(map.get_stock(MYSELF), path.size())) {
+	if (can_grow_harvester(map.get_stock(MYSELF)) && path.size() == 2) {
 		coords_t target = path.top();
 		e_direction dir = Cell::coords_to_direction(
 			target.first - next.first, target.second - next.second);
@@ -105,6 +125,10 @@ static void	apply_grow_on_stock(Stock& stock, Cell const& old_cell, Cell const& 
 			stock.set_protein(C, stock.get_protein(C) - 1);
 			stock.set_protein(D, stock.get_protein(D) - 1);
 			break;
+		case TENTACLE:
+			stock.set_protein(B, stock.get_protein(B) - 1);
+			stock.set_protein(C, stock.get_protein(C) - 1);
+			break;
 	}
 }
 
@@ -125,3 +149,4 @@ void	grow(Map& map, Cell const& cell, size_t x, size_t y)
 
 	} catch (...) {}
 }
+//-

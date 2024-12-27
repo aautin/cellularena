@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/25 00:48:55 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 15:48:41 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include "Stock.hpp"
 #include "path.hpp"
+#include "growth.hpp"
 #include "near.h"
 
 bool	is_path_valid(Map& map, std::stack<coords_t> path)
@@ -42,7 +43,7 @@ void	print_path(std::stack<coords_t> path) {
 	}
 }
 
-void	fill_path(int** grid_layer, std::stack<coords_t>& path,
+void	retrace_steps(int** grid_layer, std::stack<coords_t>& path,
 		size_t x, size_t y, int laps_index)
 {
 	path.push(std::make_pair(x, y));
@@ -60,22 +61,29 @@ void	fill_path(int** grid_layer, std::stack<coords_t>& path,
 	}
 }
 
-int	init_path(Map& map, std::stack<coords_t>& path)
+static void mark_territory(Map& map, int** grid_layer, e_owner owner, int value)
 {
-	int** grid_layer = map.new_grid_layer<int>(UNREACHED);
-
 	for (size_t x = 0; x < map.get_width(); ++x) {
 		for (size_t y = 0; y < map.get_height(); ++y) {
 			try {
-				if (map.get_cell(x, y).get_owner() == MYSELF)
-					grid_layer[x][y] = 0;
+				if (map.get_cell(x, y).get_owner() == owner)
+					grid_layer[x][y] = value;
 			} catch (...) {}
 		}
 	}
+}
+
+int	init_protein_path(Map& map, std::stack<coords_t>& path)
+{
+	int** grid_layer = map.new_grid_layer<int>(UNREACHED);
+	mark_territory(map, grid_layer, MYSELF, 0);
 
 	size_t	laps_index = 1;
 	bool	still_growing = true;
-	while (still_growing && laps_index < map.get_stock(MYSELF).get_protein(A)) {
+	size_t	maximal_range = map.get_stock(MYSELF).get_protein(A)
+		+ can_grow_harvester(map.get_stock(MYSELF));
+
+	while (still_growing && laps_index <= maximal_range) {
 		still_growing = false;
 		for (size_t x = 0; x < map.get_width(); ++x) {
 			for (size_t y = 0; y < map.get_height(); ++y) {
@@ -92,7 +100,7 @@ int	init_path(Map& map, std::stack<coords_t>& path)
 						still_growing = true;
 
 						if (Stock::is_protein(cell) && !map.is_generator(nearx, neary)) {
-							fill_path(grid_layer, path, nearx, neary, laps_index);
+							retrace_steps(grid_layer, path, nearx, neary, laps_index);
 							map.delete_grid_layer<int>(grid_layer);
 							return true;
 						}
