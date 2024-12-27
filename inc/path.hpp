@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:12:34 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 20:36:20 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 22:44:56 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "Map.hpp"
 #include "coords.h"
 
-void	empty_path(std::stack<coords>& path_ref);
+void	clear_path(std::stack<coords>& path_ref);
 bool	is_path_valid(Map const& map, std::stack<coords>& path);
 void	print_path(std::stack<coords> path);
 void	retrace_steps(int** grid_layer, std::stack<coords>& path,

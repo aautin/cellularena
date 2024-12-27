@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 20:38:57 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 22:44:56 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "growth.hpp"
 #include "near.h"
 
-void	empty_path(std::stack<coords>& path_ref)
+void	clear_path(std::stack<coords>& path_ref)
 {
 	while (!path_ref.empty())
 		path_ref.pop();
@@ -35,7 +35,7 @@ bool	is_path_valid(Map const& map, std::stack<coords>& path_ref)
 		try {
 			Cell& next_cell = map.get_cell(path_copy.top().first, path_copy.top().second);
 			if (next_cell.get_owner() != NO_OWNER || next_cell.get_type() == WALL) {
-				empty_path(path_ref);
+				clear_path(path_ref);
 				return false;
 			}
 			path_copy.pop();

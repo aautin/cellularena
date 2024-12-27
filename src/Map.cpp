@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 21:42:50 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 22:43:25 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 //Constructors-Destructors
 Map::Map(size_t width, size_t height)
-: _grid_width(width), _grid_height(height), _stocks{Stock(), Stock()}
+: _width(width), _height(height), _stocks{Stock(), Stock()}, _target_type(NO_TYPE)
 {
 	_grid = new Cell*[width];
 	for (size_t x = 0; x < width; ++x)
@@ -27,37 +27,47 @@ Map::Map(size_t width, size_t height)
 
 Map::~Map()
 {
-	for (size_t x = 0; x < _grid_width; ++x)
+	for (size_t x = 0; x < _width; ++x)
 		delete _grid[x];
 	delete _grid;
 }
 //-
 
 
-//Getters
-size_t	Map::get_width() const { return _grid_width; }
+//Setters
+void	Map::set_cell(Cell cell, size_t x, size_t y)
+{
+	if (x >= _width || y >= _height)
+		throw std::out_of_range("");
+	_grid[x][y] = cell;
+}
 
-size_t	Map::get_height() const { return _grid_height; }
+void	Map::set_target(std::stack<coords> const& target, e_type type)
+{
+	_target = target;
+	_target_type = type;
+}
+//-
+
+
+//Getters
+size_t	Map::get_width() const { return _width; }
+
+size_t	Map::get_height() const { return _height; }
 
 Cell&	Map::get_cell(size_t x, size_t y) const
 {
-	if (x >= 0 && x < _grid_width
-		&& y >= 0 && y < _grid_height)
+	if (x >= 0 && x < _width
+		&& y >= 0 && y < _height)
 		return _grid[x][y];
 	throw std::out_of_range("");
 }
 
 Stock&	Map::get_stock(e_owner index) { return _stocks[index]; }
-//-
 
+std::stack<coords>	Map::get_target() { return _target; }
 
-//Setters
-void	Map::set_cell(Cell cell, size_t x, size_t y)
-{
-	if (x >= _grid_width || y >= _grid_height)
-		throw std::out_of_range("");
-	_grid[x][y] = cell;
-}
+e_type				Map::get_target_type() { return _target_type; }
 //-
 
 

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 20:35:04 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/27 22:44:44 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ int main()
 	int map_width, map_height;
 	std::cin >> map_width >> map_height; std::cin.ignore();
 
+	std::stack<coords> protein;
+	std::stack<coords> tentacle;
+
 	Map map(map_width, map_height);
-	std::stack<coords> protein_path;
-	std::stack<coords> opponent_path;
 	Stock& my_stock = map.get_stock(MYSELF);
 
 	while (1) {
@@ -65,15 +66,23 @@ int main()
 		int required_actions_nb;
 		std::cin >> required_actions_nb; std::cin.ignore();
 		for (int i = 0; i < required_actions_nb; ++i) {
-			if (!is_path_valid(map, protein_path))
-				init_protein_path(map, protein_path);
-			// if (!is_path_valid(map, opponent_path))
-			// 	init_attack_path(map, opponent_path);
+			std::stack<coords> target = map.get_target();
+			
+			if (!is_path_valid(map, target)) {
+				init_protein_path(map, protein);
+				// init_attack_path(map, tentacle);
+				if (!protein.empty() && protein <= tentacle)
+					map.set_target(protein, HARVESTER);
+				else if (!tentacle.empty() && tentacle <= tentacle)
+					map.set_target(tentacle, TENTACLE);
+			}
+			clear_path(protein);
+			clear_path(tentacle);
 
 			if (!can_grow(my_stock))
 				std::cout << "WAIT" << std::endl;
-			else if (!protein_path.empty() && protein_path <= opponent_path)
-				grow_towards_protein(map, protein_path);
+			else if (!map.get_target().empty())
+				grow_towards_target(map);
 			// else if (!opponent_path.empty() && opponent_path <= protein_path)
 			// 	grow_towards_opponent(map, opponent_path);
 			else
