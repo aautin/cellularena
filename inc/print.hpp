@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Generator.hpp                                      :+:      :+:    :+:   */
+/*   print.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 19:50:08 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/28 18:42:26 by alexandre        ###   ########.fr       */
+/*   Created: 2024/12/28 18:19:03 by alexandre         #+#    #+#             */
+/*   Updated: 2024/12/28 18:29:22 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <cstddef>
+#include <iostream>
+#include <stack>
 
-#include "Cell.hpp"
+#include "Stock.hpp"
+#include "coords.hpp"
 
-class Generator
-{
-	public:
-		//Constructors-Destructors
-		Generator(size_t x, size_t y, e_type type);
-		Generator(Generator const& other);
-		~Generator();
-
-		//Overloads
-		Generator	operator=(Generator const& other);
-
-		//Getters
-		size_t	get_x() const;
-		size_t	get_y() const;
-		e_type	get_type() const;
-
-	private:
-		size_t const	_x;
-		size_t const	_y;
-		e_type const	_type;
-};
+void	print_stocks(Stock const& myself, Stock const& opponent);
+void	print_path(std::stack<coords> path);

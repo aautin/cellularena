@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:12:34 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 22:44:56 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/28 18:53:06 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 #include <stack>
 
 #include "Map.hpp"
-#include "coords.h"
+#include "coords.hpp"
 
-void	clear_path(std::stack<coords>& path_ref);
+template <typename T>
+void	clear_stack(std::stack<T>& stack)
+{
+	while (!stack.empty())
+		stack.pop();
+}
+
 bool	is_path_valid(Map const& map, std::stack<coords>& path);
-void	print_path(std::stack<coords> path);
 void	retrace_steps(int** grid_layer, std::stack<coords>& path,
-					size_t target_x, size_t target_y, int laps_index);
+			size_t target_x, size_t target_y, int laps_index);
 int		init_protein_path(Map& map, std::stack<coords>& path);

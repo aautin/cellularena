@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 22:44:44 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/28 18:36:41 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@
 /**
  * Grow and multiply your organisms to end up larger than your opponent.
  **/
-
-void	print_stocks(Stock const& myself, Stock const& opponent)
-{
-	std::cerr << "MYSELF:"
-		<< myself.get_protein(A) << myself.get_protein(B)
-		<< myself.get_protein(C) << myself.get_protein(D) << std::endl;
-
-	std::cerr << "OPPONENT:"
-		<< opponent.get_protein(A) << opponent.get_protein(B)
-		<< opponent.get_protein(C) << opponent.get_protein(D) << std::endl;
-}
 
 bool	operator<=(std::stack<coords> const& s1, std::stack<coords> const& s2)
 {
@@ -67,17 +56,17 @@ int main()
 		std::cin >> required_actions_nb; std::cin.ignore();
 		for (int i = 0; i < required_actions_nb; ++i) {
 			std::stack<coords> target = map.get_target();
-			
+
 			if (!is_path_valid(map, target)) {
 				init_protein_path(map, protein);
 				// init_attack_path(map, tentacle);
 				if (!protein.empty() && protein <= tentacle)
 					map.set_target(protein, HARVESTER);
-				else if (!tentacle.empty() && tentacle <= tentacle)
+				else if (!tentacle.empty())
 					map.set_target(tentacle, TENTACLE);
 			}
-			clear_path(protein);
-			clear_path(tentacle);
+			clear_stack<coords>(protein);
+			clear_stack<coords>(tentacle);
 
 			if (!can_grow(my_stock))
 				std::cout << "WAIT" << std::endl;

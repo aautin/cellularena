@@ -3,27 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   path.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 22:44:56 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/28 18:50:05 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include <stdexcept>
-#include <stack>
 
 #include "Stock.hpp"
 #include "path.hpp"
 #include "growth.hpp"
 #include "near.h"
-
-void	clear_path(std::stack<coords>& path_ref)
-{
-	while (!path_ref.empty())
-		path_ref.pop();
-}
 
 bool	is_path_valid(Map const& map, std::stack<coords>& path_ref)
 {
@@ -35,7 +27,7 @@ bool	is_path_valid(Map const& map, std::stack<coords>& path_ref)
 		try {
 			Cell& next_cell = map.get_cell(path_copy.top().first, path_copy.top().second);
 			if (next_cell.get_owner() != NO_OWNER || next_cell.get_type() == WALL) {
-				clear_path(path_ref);
+				clear_stack<coords>(path_ref);
 				return false;
 			}
 			path_copy.pop();
@@ -44,16 +36,8 @@ bool	is_path_valid(Map const& map, std::stack<coords>& path_ref)
 	return true;
 }
 
-void	print_path(std::stack<coords> path) {
-	while (!path.empty()) {
-		coords& top = path.top();
-		std::cerr << top.first << "x" << top.second << "y" << ", " << std::endl;
-		path.pop();
-	}
-}
-
 void	retrace_steps(int** grid_layer, std::stack<coords>& path,
-		size_t x, size_t y, int laps_index)
+			size_t x, size_t y, int laps_index)
 {
 	path.push(std::make_pair(x, y));
 
@@ -70,22 +54,10 @@ void	retrace_steps(int** grid_layer, std::stack<coords>& path,
 	}
 }
 
-static void mark_territory(Map& map, int** grid_layer, e_owner owner, int value)
-{
-	for (size_t x = 0; x < map.get_width(); ++x) {
-		for (size_t y = 0; y < map.get_height(); ++y) {
-			try {
-				if (map.get_cell(x, y).get_owner() == owner)
-					grid_layer[x][y] = value;
-			} catch (...) {}
-		}
-	}
-}
-
 int	init_protein_path(Map& map, std::stack<coords>& path)
 {
 	int** grid_layer = map.new_grid_layer<int>(UNREACHED);
-	mark_territory(map, grid_layer, MYSELF, 0);
+	map.mark_territory<int>(grid_layer, MYSELF, 0);
 
 	size_t	laps_index = 1;
 	bool	still_growing = true;

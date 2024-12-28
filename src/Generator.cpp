@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Generator.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 19:50:53 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 21:45:55 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/28 18:41:54 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,21 @@
 
 //Constructors-Destructors
 Generator::Generator(size_t x, size_t y, e_type type)
-: _x(x), _y(y), _type(type) { }
+: _x(x), _y(y), _type(type) {}
+
+Generator::Generator(Generator const& other)
+: _x(other._x), _y(other._y), _type(other._type) {}
 
 Generator::~Generator() {};
 //-
 
 
 //Overloads
-Generator	Generator::operator=(Generator const& other) { (void) other; return *this; }
+Generator	Generator::operator=(Generator const& other)
+{
+    (void) other;
+    return *this;
+}
 //-
 
 

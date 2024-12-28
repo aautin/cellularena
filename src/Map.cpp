@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 22:43:25 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/28 18:45:46 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ size_t	Map::get_height() const { return _height; }
 
 Cell&	Map::get_cell(size_t x, size_t y) const
 {
-	if (x >= 0 && x < _width
-		&& y >= 0 && y < _height)
+	if (x < _width && y < _height)
 		return _grid[x][y];
 	throw std::out_of_range("");
 }

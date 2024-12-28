@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   growth.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:13:07 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 22:45:37 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/28 18:28:57 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stack>
 
 #include "Map.hpp"
-#include "coords.h"
+#include "coords.hpp"
 
 //Conditions
 bool	can_grow(Stock const& stock);

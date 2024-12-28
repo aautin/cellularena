@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/27 22:45:58 by aautin           ###   ########.fr       */
+/*   Updated: 2024/12/28 18:47:58 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "Cell.hpp"
 #include "Generator.hpp"
 #include "Stock.hpp"
-#include "coords.h"
+#include "coords.hpp"
 
 
 class Map
@@ -43,6 +43,8 @@ class Map
 		//Grid layer
 		template <typename Type> Type**	new_grid_layer(Type value) const;
 		template <typename Type> void	delete_grid_layer(Type** grid_layer) const;
+		template <typename Type> void	mark_territory(Type** grid_layer,
+											e_owner owner, int value) const;
 
 		//Update
 		void	update_grid();
@@ -83,5 +85,18 @@ template <typename Type> void	Map::delete_grid_layer(Type** grid_layer) const
 	for (size_t x = 0; x < _width; ++x)
 		delete grid_layer[x];
 	delete grid_layer;
+}
+
+template <typename Type> void	Map::mark_territory(
+	Type** grid_layer, e_owner owner, int value) const
+{
+	for (size_t x = 0; x < get_width(); ++x) {
+		for (size_t y = 0; y < get_height(); ++y) {
+			try {
+				if (get_cell(x, y).get_owner() == owner)
+					grid_layer[x][y] = value;
+			} catch (...) {}
+		}
+	}
 }
 //-
