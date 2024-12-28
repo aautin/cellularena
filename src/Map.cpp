@@ -6,7 +6,7 @@
 /*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:35:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/28 18:45:46 by alexandre        ###   ########.fr       */
+/*   Updated: 2024/12/28 19:26:31 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	Map::set_cell(Cell cell, size_t x, size_t y)
 	_grid[x][y] = cell;
 }
 
-void	Map::set_target(std::stack<coords> const& target, e_type type)
+void	Map::set_target(std::stack<coords> target, e_type type)
 {
 	_target = target;
 	_target_type = type;

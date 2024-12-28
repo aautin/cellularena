@@ -6,7 +6,7 @@
 /*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:10:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/28 18:50:05 by alexandre        ###   ########.fr       */
+/*   Updated: 2024/12/28 19:30:19 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	retrace_steps(int** grid_layer, std::stack<coords>& path,
 	}
 }
 
-int	init_protein_path(Map& map, std::stack<coords>& path)
+e_type	init_path(Map& map, std::stack<coords>& path,
+	bool (*target_detector)(Map const& map, Cell const& target, size_t x, size_t y),
+	e_type target_type)
 {
 	int** grid_layer = map.new_grid_layer<int>(UNREACHED);
 	map.mark_territory<int>(grid_layer, MYSELF, 0);
@@ -83,7 +85,7 @@ int	init_protein_path(Map& map, std::stack<coords>& path)
 						if (Cell::is_protein(cell) && !map.is_generator(nearx, neary)) {
 							retrace_steps(grid_layer, path, nearx, neary, laps_index);
 							map.delete_grid_layer<int>(grid_layer);
-							return true;
+							return target_type;
 						}
 						if (cell.get_type() != WALL)
 							grid_layer[nearx][neary] = laps_index;
@@ -95,5 +97,5 @@ int	init_protein_path(Map& map, std::stack<coords>& path)
 	}
 
 	map.delete_grid_layer<int>(grid_layer);
-	return false;
+	return NO_TYPE;
 }

@@ -6,7 +6,7 @@
 /*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:22:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/28 18:36:41 by alexandre        ###   ########.fr       */
+/*   Updated: 2024/12/28 20:01:07 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,20 @@
  * Grow and multiply your organisms to end up larger than your opponent.
  **/
 
-bool	operator<=(std::stack<coords> const& s1, std::stack<coords> const& s2)
+bool is_harvester_target(Map const& map, Cell const& target, size_t x, size_t y)
 {
-	std::cerr << "OPERATOR<=" << std::endl;
-
-	if (s2.empty())
-		return true;
-
-	return s1.size() <= s2.size();
+	return Cell::is_protein(target) && !map.is_generator(x, y);
+}
+bool is_tentacle_target(Map const& map, Cell const& target, size_t x, size_t y)
+{
+	(void) map; (void) x; (void) y;
+	return target.get_owner() == OPPONENT && target.get_type() != TENTACLE;
 }
 
 int main()
 {
 	int map_width, map_height;
 	std::cin >> map_width >> map_height; std::cin.ignore();
-
-	std::stack<coords> protein;
-	std::stack<coords> tentacle;
 
 	Map map(map_width, map_height);
 	Stock& my_stock = map.get_stock(MYSELF);
@@ -50,30 +47,41 @@ int main()
 		map.update_grid();
 		map.update_stocks();
 		map.update_generators();
-		// print_stocks(map.get_stock(MYSELF), map.get_stock(OPPONENT));
 
 		int required_actions_nb;
 		std::cin >> required_actions_nb; std::cin.ignore();
 		for (int i = 0; i < required_actions_nb; ++i) {
-			std::stack<coords> target = map.get_target();
+			std::stack<coords>	target = map.get_target();
 
+			/* Init strategy
+				if path not valid:
+					if protein accessible:
+						set path on it
+					if path not set and can grow tentacle
+						set path on it
+			*/
 			if (!is_path_valid(map, target)) {
-				init_protein_path(map, protein);
-				// init_attack_path(map, tentacle);
-				if (!protein.empty() && protein <= tentacle)
-					map.set_target(protein, HARVESTER);
-				else if (!tentacle.empty())
-					map.set_target(tentacle, TENTACLE);
-			}
-			clear_stack<coords>(protein);
-			clear_stack<coords>(tentacle);
+				std::stack<coords>	new_target;
+				e_type				type;
 
+				type = init_path(map, new_target, &is_harvester_target, HARVESTER);
+				if (type == NO_TYPE && can_grow_tentacle(my_stock))
+					type = init_path(map, target, &is_tentacle_target, TENTACLE);
+				map.set_target(target, type);
+				clear_stack<coords>(target);
+			}
+
+			/* Growth strategy
+				HARVESTER pathsize >= 1
+				TENTACLE pathsize >= 2
+				if pathsize == 2:
+					try to put target_type towards target, then clear path
+					(tentacle will be possible everytime, not harvester)
+			*/
 			if (!can_grow(my_stock))
 				std::cout << "WAIT" << std::endl;
 			else if (!map.get_target().empty())
 				grow_towards_target(map);
-			// else if (!opponent_path.empty() && opponent_path <= protein_path)
-			// 	grow_towards_opponent(map, opponent_path);
 			else
 				grow_where_possible(map);
 		}

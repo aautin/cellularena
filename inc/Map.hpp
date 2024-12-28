@@ -6,7 +6,7 @@
 /*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:54:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/12/28 18:47:58 by alexandre        ###   ########.fr       */
+/*   Updated: 2024/12/28 19:26:44 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "Stock.hpp"
 #include "coords.hpp"
 
-
 class Map
 {
 	public:
@@ -30,7 +29,7 @@ class Map
 
 		//Setters
 		void	set_cell(Cell cell, size_t x, size_t y);
-		void	set_target(std::stack<coords> const& target, e_type type);
+		void	set_target(std::stack<coords> target, e_type type);
 
 		//Getters
 		size_t				get_width() const;
